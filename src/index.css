@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #062943;
+  --color-river: #1687A7;
+  --color-river-ink: #12708C;
+  --color-ember: #E87528;
+  --color-ember-ink: #C2571A;
+  --color-paper: #FAFAF7;
+  --color-slate-ink: #526574;
+  --color-line: #E3E6E8;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-navy font-sans antialiased;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-card {
+    border: 1px solid #062943 !important;
+    box-shadow: none !important;
+    padding: 1.5rem !important;
+    break-inside: avoid;
+  }
+}
