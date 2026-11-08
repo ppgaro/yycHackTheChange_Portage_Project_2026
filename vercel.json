@@ -1,5 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/metrics/js",
+      "destination": "https://www.googletagmanager.com/gtag/js"
+    },
+    {
+      "source": "/metrics/g/collect",
+      "destination": "https://www.google-analytics.com/g/collect"
+    }
+  ],
   "headers": [
     {
       "source": "/brand/(.*)",
