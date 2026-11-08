@@ -3,7 +3,7 @@
 > **"People changing careers shouldn't have to start from zero."**  
 > Portage finds the skills you already have, tests them on realistic job tasks, and points to the one gap worth closing next. Built for Hack the Change 2026 in Calgary.
 >
-> **Live Demo:** [https://portage.garo.pro/](https://portage.garo.pro/) ([https://portage-yychack2026.vercel.app/](https://portage-yychack2026.vercel.app/))  
+> **Live Demo:** [https://portage.wiki/](https://portage.wiki/) ([https://portage-yychack2026.vercel.app/](https://portage-yychack2026.vercel.app/))  
 > **Video Walkthrough:** [https://vimeo.com/1244891652](https://vimeo.com/1244891652)  
 > **Code Repository:** [https://github.com/ppgaro/yycHackTheChange_Portage_Project_2026](https://github.com/ppgaro/yycHackTheChange_Portage_Project_2026)
 

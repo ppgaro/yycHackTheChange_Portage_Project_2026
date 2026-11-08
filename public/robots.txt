@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portage.garo.pro/sitemap.xml
+Sitemap: https://portage.wiki/sitemap.xml
 Sitemap: https://portage-yychack2026.vercel.app/sitemap.xml

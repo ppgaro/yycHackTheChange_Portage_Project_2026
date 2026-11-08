@@ -3,7 +3,7 @@ import { STEP_LABELS } from '../state/portage';
 import { getScenario } from '../data/scenarios';
 import { BRAND } from '../brand';
 
-export const CANONICAL_ORIGIN = 'https://portage.garo.pro';
+export const CANONICAL_ORIGIN = 'https://portage.wiki';
 
 export interface PageSeoMetadata {
   title: string;

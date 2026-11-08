@@ -181,7 +181,7 @@ test.describe('Portage End-to-End User Journeys', () => {
   }) => {
     const robotsRes = await request.get('/robots.txt');
     expect(robotsRes.status()).toBe(200);
-    expect(await robotsRes.text()).toContain('Sitemap: https://portage.garo.pro/sitemap.xml');
+    expect(await robotsRes.text()).toContain('Sitemap: https://portage.wiki/sitemap.xml');
 
     const sitemapRes = await request.get('/sitemap.xml');
     expect(sitemapRes.status()).toBe(200);
@@ -194,7 +194,7 @@ test.describe('Portage End-to-End User Journeys', () => {
     await expect(page).toHaveTitle(/Portage — Your experience counts\./);
 
     const canonicalHref = await page.locator('link[rel="canonical"]').getAttribute('href');
-    expect(canonicalHref).toBe('https://portage.garo.pro/');
+    expect(canonicalHref).toBe('https://portage.wiki/');
 
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content');
     expect(ogImage).toContain('portage-logo.png');
@@ -210,7 +210,7 @@ test.describe('Portage End-to-End User Journeys', () => {
     await expect(page).toHaveTitle(/Hospitality Supervisor.*Business Intelligence Analyst/);
 
     const deepCanonical = await page.locator('link[rel="canonical"]').getAttribute('href');
-    expect(deepCanonical).toBe('https://portage.garo.pro/?scenario=hospitality-bi');
+    expect(deepCanonical).toBe('https://portage.wiki/?scenario=hospitality-bi');
 
     const dataLayerEvents = await page.evaluate(() => {
       return (window as unknown as { dataLayer?: unknown[][] }).dataLayer ?? [];
