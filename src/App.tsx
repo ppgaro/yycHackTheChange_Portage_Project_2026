@@ -1,11 +1,22 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import {
   portageReducer,
   createInitialState,
   STEPS,
   Step,
+  PortageAction,
 } from './state/portage';
+import { getScenario } from './data/scenarios';
 import { BRAND } from './brand';
+import { syncDocumentSeo } from './seo/metadata';
+import {
+  initGa4,
+  trackStepView,
+  trackScenarioSelected,
+  trackSkillsAnalyzed,
+  trackSkillCurated,
+  trackPracticeAttempt,
+} from './analytics/ga4';
 import { Navbar } from './components/Navbar';
 import { Stepper } from './components/Stepper';
 import { Welcome } from './components/Welcome';
@@ -17,20 +28,86 @@ import { PortfolioGenerator } from './components/PortfolioGenerator';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 export function App() {
-  const [state, dispatch] = useReducer(portageReducer, undefined, createInitialState);
+  const [state, rawDispatch] = useReducer(portageReducer, undefined, () => {
+    const initial = createInitialState();
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const qScenario = params.get('scenario');
+      if (qScenario && getScenario(qScenario)) {
+        return portageReducer(initial, {
+          type: 'START_SCENARIO',
+          scenarioId: qScenario,
+        });
+      }
+    }
+    return initial;
+  });
   const [maxReached, setMaxReached] = useState<number>(0);
 
+  const dispatch = useCallback(
+    (action: PortageAction) => {
+      rawDispatch(action);
+      const nextState = portageReducer(state, action);
+      switch (action.type) {
+        case 'START_SCENARIO':
+          trackScenarioSelected(action.scenarioId, 'preset');
+          break;
+        case 'START_BLANK':
+          trackScenarioSelected('custom', 'blank');
+          break;
+        case 'ANALYZE': {
+          const unmatched = nextState.mappings.filter(
+            (m) => m.transferableSkill === 'Needs your input'
+          ).length;
+          trackSkillsAnalyzed(
+            nextState.scenarioId,
+            nextState.mappings.length,
+            unmatched
+          );
+          break;
+        }
+        case 'ACCEPT_ALL_SUGGESTED':
+          trackSkillCurated(nextState.scenarioId, 'accept_all');
+          break;
+        case 'SET_MAPPING_STATUS':
+          trackSkillCurated(nextState.scenarioId, action.status);
+          break;
+        case 'SUBMIT_ATTEMPT': {
+          const latest = nextState.attempts[nextState.attempts.length - 1];
+          if (latest) {
+            trackPracticeAttempt(
+              nextState.scenarioId,
+              latest.attemptNumber,
+              latest.result.score,
+              latest.result.criteria.length
+            );
+          }
+          break;
+        }
+        default:
+          break;
+      }
+    },
+    [state]
+  );
+
   const currentIdx = STEPS.indexOf(state.step);
+
+  useEffect(() => {
+    initGa4();
+  }, []);
 
   useEffect(() => {
     if (currentIdx > maxReached) {
       setMaxReached(currentIdx);
     }
+    syncDocumentSeo(state.step, state.scenarioId);
+    trackStepView(state.step, state.scenarioId);
     const h1 = document.querySelector('main h1') as HTMLElement | null;
     if (h1) {
       h1.focus();
     }
-  }, [state.step, currentIdx, maxReached]);
+  }, [state.step, state.scenarioId, currentIdx, maxReached]);
 
   // Step validity for advancing
   const canAdvance = (() => {

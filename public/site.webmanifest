@@ -1,0 +1,26 @@
+{
+  "name": "Portage — Your experience counts.",
+  "short_name": "Portage",
+  "description": "Portage finds the skills you already have, tests them on real job tasks, and points to the one gap worth closing next.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#062943",
+  "icons": [
+    {
+      "src": "/brand/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/portage-mark.png",
+      "sizes": "250x250",
+      "type": "image/png"
+    }
+  ]
+}

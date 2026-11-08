@@ -8,6 +8,7 @@ import {
   EVIDENCE_LABELS,
 } from '../engine/evidence';
 import { BrandMark } from './BrandMark';
+import { trackEvidenceExport } from '../analytics/ga4';
 import {
   Download,
   Printer,
@@ -32,16 +33,19 @@ export function PortfolioGenerator({ state, dispatch }: PortfolioGeneratorProps)
   }, [state]);
 
   const handleDownloadJson = () => {
+    trackEvidenceExport(state.scenarioId, 'json', state.attempts.length);
     const jsonStr = JSON.stringify(record, null, 2);
     downloadFile(jsonStr, 'portage-evidence.json', 'application/json');
   };
 
   const handleDownloadMarkdown = () => {
+    trackEvidenceExport(state.scenarioId, 'markdown', state.attempts.length);
     const mdStr = exportEvidenceMarkdown(record);
     downloadFile(mdStr, 'portage-evidence.md', 'text/markdown');
   };
 
   const handlePrint = () => {
+    trackEvidenceExport(state.scenarioId, 'print', state.attempts.length);
     window.print();
   };
 

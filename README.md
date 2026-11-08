@@ -2,6 +2,10 @@
 
 > **"People changing careers shouldn't have to start from zero."**  
 > Portage finds the skills you already have, tests them on realistic job tasks, and points to the one gap worth closing next. Built for Hack the Change 2026 in Calgary.
+>
+> **Live Demo:** [https://portage.garo.pro/](https://portage.garo.pro/) ([https://portage-yychack2026.vercel.app/](https://portage-yychack2026.vercel.app/))  
+> **Video Walkthrough:** [https://vimeo.com/1244891652](https://vimeo.com/1244891652)  
+> **Code Repository:** [https://github.com/ppgaro/yycHackTheChange_Portage_Project_2026](https://github.com/ppgaro/yycHackTheChange_Portage_Project_2026)
 
 ---
 
@@ -109,10 +113,10 @@ Portage is built on radical honesty and transparent standards:
 
 ---
 
-## AI Disclosure
+## AI & Privacy Disclosure
 
-- **Zero AI at Runtime:** Portage runs 100% offline inside your web browser. Scoring, gap prioritization, and skill suggestion use pure, auditable deterministic logic. No LLMs are called during user interaction.
-- **Privacy First:** No user input, role information, or practice brief leaves your device. No analytics, tracking, cookies, or external server calls.
+- **Zero AI at Runtime:** Portage scoring, gap prioritization, and skill suggestion run 100% locally inside your web browser using pure, auditable deterministic logic. No LLMs are called during user interaction.
+- **Privacy First:** No user-typed duties (`dutiesInput`), custom role titles, or written practice responses (`ChallengeFields`) ever leave your device. Anonymous, non-PII step funnel events (GA4 with Google Signals and ad personalization disabled) record high-level scenario progression only.
 
 ---
 
