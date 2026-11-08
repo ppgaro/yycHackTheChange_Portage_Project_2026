@@ -71,25 +71,16 @@ export function initGa4(measurementId = getGaMeasurementId()): boolean {
     return true;
   }
 
-  window.gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'granted',
-  });
-
-  window.gtag('js', new Date());
-  window.gtag('config', measurementId, {
-    send_page_view: false,
-    anonymize_ip: true,
-    allow_google_signals: false,
-    allow_ad_personalization_signals: false,
-  });
-
   const existingScript = document.querySelector(
     `script[src*="googletagmanager.com/gtag/js"]`
   );
   if (!existingScript) {
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+    });
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
